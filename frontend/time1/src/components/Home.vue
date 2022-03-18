@@ -8,7 +8,9 @@ export default {
   data() {
     return {
       msg: "Home",
+      name: "axios",
       date: "2022-02-02",
+      time: "17:00",
     };
   },
   mounted() {
@@ -26,8 +28,8 @@ export default {
     post() {
       axios
         .post("http://localhost:8090/demo1", {
-          name: "axios6",
-          time: "2022-03-17T20:24:01",
+          name: this.name,
+          time: `${this.date}T${this.time}`,
         })
         .then((response) => {
           console.log(response);
@@ -64,8 +66,14 @@ export default {
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-4">
+        <input type="text" class="form-control" v-model="name" />
+      </div>
+      <div class="col-md-4">
         <input type="text" class="form-control" ref="mydate" v-model="date" />
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" v-model="time" />
       </div>
     </div>
   </div>
