@@ -1,3 +1,6 @@
+
+1)
+
 <script>
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -36,3 +39,87 @@ export default {};
     </div>
   </main>
 </template>
+
+2)
+
+<script>
+import { Collapse } from "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+export default {
+  data() {
+    return {
+      myCollapse: undefined,
+    };
+  },
+  mounted() {
+    console.log("mounted");
+    var collapseElementList = [].slice.call(
+      document.querySelectorAll(".collapse")
+    );
+    var collapseList = collapseElementList.map((collapseEl) => {
+      this.myCollapse = new Collapse(collapseEl);
+      return this.myCollapse;
+    });
+  },
+  methods: {
+    myCol() {
+      //console.log(this.myCollapse);
+      this.myCollapse.toggle();
+    },
+  },
+};
+</script>
+
+<template>
+  <main>
+    <header class="d-flex flex-column h-100">
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarToggler"
+          aria-controls="navbarToggler"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <RouterLink class="nav-link" active-class="active" to="/"
+                >Home</RouterLink
+              >
+            </li>
+            <li class="nav-item">
+              <RouterLink
+                class="nav-link"
+                active-class="active"
+                to="/hello-world"
+                >Hello, World!</RouterLink
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="flex-shrink-0">
+      <div class="container">
+        <RouterView />
+      </div>
+      <hr />
+      <button type="button" class="btn btn-primary" @click="myCol()">
+        Collapse
+      </button>
+    </div>
+  </main>
+</template>
+
+<style scoped>
+.container {
+  padding: 60px 15px 0;
+}
+</style>
+

@@ -1,11 +1,21 @@
 <script>
 import axios from "axios";
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
+import dateFormat from "dateformat";
 
 export default {
   data() {
     return {
       msg: "Home",
+      date: "2022-02-02",
     };
+  },
+  mounted() {
+    this.date = dateFormat(new Date(), "yyyy-mm-dd");
+    flatpickr(this.$refs.mydate, {
+      defaultDate: this.date,
+    });
   },
   methods: {
     get() {
@@ -32,7 +42,31 @@ export default {
 <template>
   <h1>{{ msg }}</h1>
   <hr />
-  <button type="button" class="btn btn-primary" @click="get()">Get</button>
-  &nbsp;
-  <button type="button" class="btn btn-primary" @click="post()">Post</button>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-6">
+        <button
+          type="button"
+          class="btn btn-primary form-control"
+          @click="get()"
+        >
+          Get
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button
+          type="button"
+          class="btn btn-primary form-control"
+          @click="post()"
+        >
+          Post
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <input type="text" class="form-control" ref="mydate" v-model="date" />
+      </div>
+    </div>
+  </div>
 </template>
