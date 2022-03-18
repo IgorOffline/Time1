@@ -3,6 +3,7 @@ package practice.time1.demo1;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import practice.time1.exceptions.TimeTooLateConstraint;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -25,6 +26,7 @@ public class Demo1Dto {
     @NotBlank(message = "Name is mandatory")
     private String name;
     @Column(nullable = false)
+    @TimeTooLateConstraint
     private LocalDateTime time;
     @Column
     @CreationTimestamp
